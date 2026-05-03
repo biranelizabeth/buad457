@@ -1,0 +1,721 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,500;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
+
+/* =============================================
+   TOKENS
+   ============================================= */
+:root {
+  --ivory:        #FFFAF3;
+  --warm-white:   #FFFEF8;
+  --cream:        #FFF5E4;
+
+  --text:         #221008;
+  --text-mid:     #5C3A28;
+  --text-muted:   #9A7A68;
+  --border:       #E8D4B8;
+  --border-light: #F0E4CC;
+
+  --raspberry:         #D42A50;
+  --muted-raspberry:   #C05C70;
+  --dusty-rose:        #C07890;
+  --pale-pink:         #F2C4D6;
+  --lavender-hue: #9070CC;
+  --gold:         #E0B428;
+  --cerulean:     #2484C0;
+  --yellow:       #F0C018;
+  --magenta:      #C04898;
+
+  --shadow:       rgba(34, 16, 8, 0.08);
+  --shadow-lg:    rgba(34, 16, 8, 0.16);
+
+  /* Home page default accent = cerulean */
+  --accent:       var(--cerulean);
+  --accent-pale:  rgba(36, 132, 192, 0.10);
+  --accent-rgb:   36, 132, 192;
+}
+
+/* Chapter I — pale pink */
+body.page-teal {
+  --accent:      var(--pale-pink);
+  --accent-pale: rgba(242, 196, 214, 0.18);
+  --accent-rgb:  242, 196, 214;
+}
+/* Chapter II — dusty rose */
+body.page-sage {
+  --accent:      var(--dusty-rose);
+  --accent-pale: rgba(192, 120, 144, 0.11);
+  --accent-rgb:  192, 120, 144;
+}
+/* Chapter III — muted raspberry */
+body.page-coral {
+  --accent:      var(--muted-raspberry);
+  --accent-pale: rgba(192, 92, 112, 0.10);
+  --accent-rgb:  192, 92, 112;
+}
+
+/* =============================================
+   RESET
+   ============================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--ivory);
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  line-height: 1.82;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', Georgia, serif;
+  line-height: 1.1;
+  color: var(--text);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+p  { color: var(--text-mid); margin-bottom: 1em; font-size: 0.96rem; }
+p:last-child { margin-bottom: 0; }
+a  { color: inherit; text-decoration: none; }
+em { font-style: italic; }
+
+/* =============================================
+   NAVIGATION
+   ============================================= */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 250, 243, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 4px solid var(--gold);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 62px;
+}
+
+.nav-brand {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+}
+
+.nav-links { display: flex; gap: 2.4rem; list-style: none; }
+.nav-links a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  position: relative;
+  transition: color 0.22s;
+  padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 0; height: 2px;
+  background: var(--accent);
+  transition: width 0.24s ease;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--accent); }
+
+/* hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+
+/* =============================================
+   PAGE ENTRY ANIMATION
+   ============================================= */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+main { animation: fadeUp 0.55s ease forwards; }
+
+/* =============================================
+   HOME — HERO  (full-width romantic beach scene)
+   ============================================= */
+.home-hero {
+  /* Full-width: remove max-width so background spans the page */
+  width: 100%;
+  padding: 7rem 2rem 6rem;
+  text-align: center;
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Romantic hazy coastal scene */
+  background-color: #B8CEDF;  /* fallback */
+  background-image:
+    /* Bright reading area where text sits */
+    radial-gradient(ellipse at 50% 52%, rgba(255, 253, 248, 0.90) 0%, rgba(245, 250, 255, 0.55) 28%, transparent 52%),
+    /* Morning mist drifting left */
+    radial-gradient(ellipse at 16% 56%, rgba(235, 248, 255, 0.52) 0%, transparent 32%),
+    /* Warm late-light glow right of horizon */
+    radial-gradient(ellipse at 82% 50%, rgba(255, 248, 225, 0.42) 0%, transparent 30%),
+    /* Distant sail — bright point left of center */
+    radial-gradient(ellipse at 34% 47%, rgba(255, 255, 255, 0.55) 0%, transparent 3.5%),
+    /* Distant sail — center right */
+    radial-gradient(ellipse at 60% 46%, rgba(255, 255, 255, 0.48) 0%, transparent 2.8%),
+    /* Distant sail — far right */
+    radial-gradient(ellipse at 74% 48%, rgba(255, 255, 255, 0.38) 0%, transparent 2%),
+    /* Main sky-to-water gradient */
+    linear-gradient(
+      to bottom,
+      #8AAEC8  0%,    /* cool blue upper sky */
+      #A8C8DF  10%,   /* mid sky */
+      #C0D8EE  22%,   /* pale cerulean */
+      #D8ECFA  34%,   /* soft near-horizon sky */
+      #EBF4FA  41%,   /* hazy upper horizon */
+      #F5F0E8  47%,   /* warm sandy horizon glow */
+      #EAF3F8  53%,   /* water reflection line */
+      #C4DAE8  66%,   /* near-water shimmer */
+      #9ABCCC  80%,   /* mid-depth water */
+      #7EA8BC  100%   /* deep water foreground */
+    );
+}
+
+/* Text-constraining wrapper (since .home-hero is now full-width) */
+.home-hero > * { position: relative; z-index: 1; }
+.home-hero > p.hero-byline,
+.home-hero > p.hero-intro { max-width: 820px; }
+
+.hero-eyebrow {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+}
+
+.home-hero h1 {
+  font-size: clamp(3rem, 7.5vw, 5.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 1.8rem;
+  color: var(--text);
+}
+.home-hero h1 em {
+  font-style: italic;
+  color: var(--cerulean);
+}
+
+.hero-byline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-ornament {
+  width: 260px;
+  height: 1px;
+  background: rgba(34, 16, 8, 0.18);
+  margin: 2.6rem auto;
+}
+.hero-title-caps {
+  white-space: nowrap;
+}
+
+.wm-cypher-img {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-color: var(--gold);
+  -webkit-mask-image: url('wm-cypher-transparent.png');
+  mask-image: url('wm-cypher-transparent.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.hero-intro {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.06rem, 1.9vw, 1.22rem);
+  line-height: 1.9;
+  color: var(--text-mid);
+  max-width: 680px;
+  font-weight: 400;
+}
+.hero-intro::first-letter {
+  font-size: 4.2em;
+  line-height: 0.72;
+  float: left;
+  margin-right: 0.08em;
+  margin-top: 0.05em;
+  color: var(--cerulean);
+  font-weight: 400;
+}
+
+/* =============================================
+   HOME — THEMES BAND
+   ============================================= */
+.themes-band {
+  background: var(--cream);
+  padding: 5.5rem 2rem 6rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.themes-band-inner { max-width: 1100px; margin: 0 auto; }
+
+.band-header { text-align: center; margin-bottom: 3.5rem; }
+.band-label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.band-header h2 {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.theme-card {
+  border: 1px solid var(--border);
+  border-top: 5px solid transparent;
+  padding: 2.5rem 2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  position: relative;
+}
+
+/* Card 1 → Chapter I → pale pink */
+.card-1 {
+  background: linear-gradient(160deg, rgba(242, 196, 214, 0.18) 0%, var(--warm-white) 55%);
+  border-top-color: var(--pale-pink);
+}
+/* Card 2 → Chapter II → dusty rose */
+.card-2 {
+  background: linear-gradient(160deg, rgba(192, 120, 144, 0.11) 0%, var(--warm-white) 55%);
+  border-top-color: var(--dusty-rose);
+}
+/* Card 3 → Chapter III → muted raspberry */
+.card-3 {
+  background: linear-gradient(160deg, rgba(192, 92, 112, 0.10) 0%, var(--warm-white) 55%);
+  border-top-color: var(--muted-raspberry);
+}
+
+.theme-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 48px var(--shadow-lg);
+}
+
+.card-roman {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  display: block;
+}
+.card-bar {
+  width: 30px; height: 3px;
+  border-radius: 2px;
+  margin-bottom: 1.4rem;
+  transition: width 0.3s ease;
+}
+.theme-card:hover .card-bar { width: 55px; }
+.card-1 .card-bar { background: var(--pale-pink); }
+.card-2 .card-bar { background: var(--dusty-rose); }
+.card-3 .card-bar { background: var(--muted-raspberry); }
+
+.theme-card h3 {
+  font-size: 1.55rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.card-1 h3 { color: var(--pale-pink); }
+.card-2 h3 { color: var(--dusty-rose); }
+.card-3 h3 { color: var(--muted-raspberry); }
+
+.card-sub {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+  line-height: 1.45;
+}
+.card-desc {
+  font-size: 0.88rem;
+  line-height: 1.76;
+  flex: 1;
+  margin-bottom: 1.8rem;
+}
+.card-cta {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.22s ease;
+}
+.card-1 .card-cta { color: var(--pale-pink); }
+.card-2 .card-cta { color: var(--dusty-rose); }
+.card-3 .card-cta { color: var(--muted-raspberry); }
+.theme-card:hover .card-cta { gap: 0.9rem; }
+
+/* =============================================
+   HOME — CLOSING SECTION
+   ============================================= */
+.how-section {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 5.5rem 2rem 6rem;
+  text-align: center;
+}
+.how-section h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 1.4rem;
+  letter-spacing: -0.02em;
+}
+.how-section p { font-size: 0.95rem; line-height: 1.9; }
+
+/* =============================================
+   ORNAMENT / RULE
+   ============================================= */
+.ornament-rule {
+  height: 1px;
+  background: var(--border);
+  margin: 3rem auto;
+  max-width: 200px;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.site-footer {
+  background: var(--cream);
+  border-top: 3px solid var(--gold);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+.site-footer p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* =============================================
+   THEME PAGES — HERO
+   ============================================= */
+.theme-hero {
+  padding: 6rem 2rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    160deg,
+    rgba(var(--accent-rgb), 0.14) 0%,
+    rgba(var(--accent-rgb), 0.06) 45%,
+    transparent 72%
+  ),
+  radial-gradient(ellipse at 78% 78%, rgba(var(--accent-rgb), 0.09) 0%, transparent 55%);
+}
+
+.theme-chapter-label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+}
+
+.theme-hero h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 1.1rem;
+  color: var(--accent);
+  letter-spacing: -0.025em;
+}
+
+.theme-tagline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.22rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.55;
+  white-space: nowrap;
+}
+.theme-hero-rule {
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  margin: 2rem auto 0;
+  border-radius: 2px;
+}
+
+/* =============================================
+   THEME PAGES — SUMMARY BAND
+   ============================================= */
+.summary-band {
+  background: var(--warm-white);
+  padding: 4rem 2rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 4px solid var(--accent);
+}
+.summary-band-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.summary-band p {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.06rem, 1.8vw, 1.2rem);
+  line-height: 1.94;
+  color: var(--text);
+  font-weight: 400;
+  margin-bottom: 1em;
+}
+
+/* =============================================
+   THEME PAGES — PULL QUOTE (solid accent bg)
+   ============================================= */
+.pull-quote-band {
+  padding: 4.5rem 2rem;
+  text-align: center;
+  background: var(--accent-pale);
+  border-left: 4px solid var(--accent);
+}
+.pull-quote-band blockquote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.58;
+  position: relative;
+  padding: 0 1rem;
+}
+.pull-quote-band blockquote::before {
+  content: '\201C';
+  position: absolute;
+  left: -0.5rem; top: -0.2em;
+  font-size: 5rem;
+  line-height: 1;
+  color: rgba(var(--accent-rgb), 0.22);
+  font-weight: 400;
+}
+.pull-quote-band cite {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.64rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 1.8rem;
+}
+
+/* =============================================
+   THEME PAGES — LESSONS
+   ============================================= */
+.lessons-section {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 5.5rem 2rem 4.5rem;
+}
+.lessons-label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+
+.lesson {
+  margin-bottom: 4.5rem;
+  padding-bottom: 4.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+.lesson:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.lesson-num {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.lesson h3 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.lesson > p {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  margin-bottom: 1.4rem;
+  color: var(--text-mid);
+}
+
+.apply-it {
+  margin-top: 0.5rem;
+  padding: 1.5rem 1.8rem;
+  border-left: 4px solid var(--accent);
+  background: var(--accent-pale);
+}
+.apply-label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.55rem;
+}
+.apply-it p {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.78;
+  margin-bottom: 0;
+  color: var(--text);
+}
+
+/* =============================================
+   THEME PAGES — BOTTOM NAV
+   ============================================= */
+.theme-page-nav {
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+  padding: 2rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.page-nav-link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.22s, gap 0.22s;
+}
+.page-nav-link:hover { color: var(--accent); gap: 0.8rem; }
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 900px) {
+  .cards-grid        { grid-template-columns: 1fr; gap: 1.4rem; }
+  .site-nav          { padding: 0 1.5rem; }
+  .home-hero         { padding: 5rem 1.5rem 4.5rem; min-height: 70vh; }
+  .theme-hero        { padding: 4.5rem 1.5rem 3.5rem; }
+  .lessons-section   { padding: 4rem 1.5rem 3rem; }
+  .theme-page-nav    { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+  .pull-quote-band blockquote::before { display: none; }
+}
+
+@media (max-width: 580px) {
+  .nav-brand  { font-size: 0.85rem; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 62px; left: 0; right: 0;
+    background: var(--ivory);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.2rem;
+    z-index: 99;
+  }
+  .nav-links.open  { display: flex; }
+  .nav-links a     { font-size: 0.76rem; }
+  .home-hero h1    { font-size: 2.8rem; }
+  .home-hero       { min-height: 60vh; }
+  .hero-intro::first-letter { font-size: 3.2em; }
+  .theme-hero h1   { font-size: 2.8rem; }
+}
