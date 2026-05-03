@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Field Guide to Creative Problem Solving</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <nav class="site-nav">
+    <span class="nav-brand">Creative Problem Solving</span>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="theme1.html">Embrace the Unknown</a></li>
+      <li><a href="theme2.html">Listen to Learn</a></li>
+      <li><a href="theme3.html">Reframe Everything</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="home-hero">
+      <h1>A <em>Field Guide</em> to<br><span class="hero-title-caps">Creative Problem Solving</span></h1>
+      <p class="hero-byline">William &amp; Mary &nbsp;·&nbsp; Lessons from One Semester</p>
+
+      <div class="hero-ornament"></div>
+
+      <p class="hero-intro">
+        This is not a textbook. It is a field guide assembled from a semester of games
+        that felt more meaningful than lectures, conversations that changed how I listen,
+        and moments that quietly rearranged my assumptions. What began as weekly blog entries
+        became something I didn't expect: a coherent map of how I think, where I get stuck,
+        and what I want to carry forward. Three discoveries kept surfacing across every
+        exercise, every guest speaker, every chaotic classroom activity. This website is my
+        attempt to share them as lived lessons with practical roots. I hope they challenge
+        something in you, too.
+      </p>
+    </section>
+
+    <!-- THEMES BAND -->
+    <section class="themes-band">
+      <div class="themes-band-inner">
+
+        <div class="band-header">
+          <span class="band-label">Three Core Themes</span>
+          <h2>The Discoveries</h2>
+        </div>
+
+        <div class="cards-grid">
+
+          <a href="theme1.html" class="theme-card card-1">
+            <span class="card-roman">Chapter I</span>
+            <div class="card-bar"></div>
+            <h3>Embrace the Unknown</h3>
+            <p class="card-sub">On ambiguity, adaptability, and letting go of control</p>
+            <p class="card-desc">
+              Creative thinking begins exactly where certainty ends. This chapter explores
+              what happens when you stop fighting uncertainty and start treating it as the
+              actual material to work with.
+            </p>
+            <span class="card-cta">Explore &nbsp;→</span>
+          </a>
+
+          <a href="theme2.html" class="theme-card card-2">
+            <span class="card-roman">Chapter II</span>
+            <div class="card-bar"></div>
+            <h3>Listen to Learn</h3>
+            <p class="card-sub">On curiosity, collaboration, and knowledge without agenda</p>
+            <p class="card-desc">
+              We are trained to absorb information in order to perform with it. This chapter
+              is about unlearning that reflex and discovering how much richer thinking
+              becomes when curiosity is freed from any obligation to be useful.
+            </p>
+            <span class="card-cta">Explore &nbsp;→</span>
+          </a>
+
+          <a href="theme3.html" class="theme-card card-3">
+            <span class="card-roman">Chapter III</span>
+            <div class="card-bar"></div>
+            <h3>Reframe Everything</h3>
+            <p class="card-sub">On perspective shifts, cognitive reappraisals, and new seeing</p>
+            <p class="card-desc">
+              The most powerful creative tool isn't a framework or a method. It's perspective.
+              This chapter is about the subtle, transformative practice of asking:
+              <em>what if I thought about this differently?</em>
+            </p>
+            <span class="card-cta">Explore &nbsp;→</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO USE -->
+    <section class="how-section">
+      <div class="ornament-rule"></div>
+      <h2>How to Use This Guide</h2>
+      <p>
+        Each chapter opens with a summary of the theme, followed by three lessons drawn
+        from class activities, guest speakers, and personal reflection. Every lesson ends
+        with a note on how I'm actually working to apply it. You don't need to read in
+        order. Start wherever the title resonates most.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>A Field Guide to Creative Problem Solving &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; William &amp; Mary</p>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function () {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>
